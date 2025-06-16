@@ -19,7 +19,7 @@ function App() {
     if(!token){
       return;
     }
-    axios.get('http://localhost:4000/verify-token', {
+    axios.get('https://central-auth-eygy.onrender.com/verify-token', {
       headers: { Authorization: `Bearer ${token}` },
       withCredentials: true
     }).then(res => {
@@ -40,7 +40,7 @@ function App() {
   }, []);
   const handleLogin = async () => {
     try {
-      const res = await axios.post('http://localhost:4000/login', {
+      const res = await axios.post('https://central-auth-eygy.onrender.com/login', {
         email,
         password,
         redirectUri
