@@ -11,7 +11,7 @@ const db = [];
 app.use(cors({ origin: true, credentials: true }));
 app.use(bodyParser.json());
 const allowedDomains = [
-  'http://localhost:5174',
+  'https://73d5-2401-4900-88c4-c34a-397f-1c83-f9ea-9dcf.ngrok-free.app',
 ];
 
 app.post('/login', (req, res) => {
