@@ -26,17 +26,20 @@ function App() {
       if (res.data.success) {
         setMessage('Login successful.');
         setLoggedIn(true);
-        if(redirectUri)
-        window.parent.postMessage({ loggedIn: true, token}, '*');
+        if(redirectUri){
+          window.opener.postMessage({ loggedIn: true, token}, '*');
+          window.close();
+        }
       } else {
         setLoggedIn(false);
         if(redirectUri)
-        window.parent.postMessage({ loggedIn: false }, '*');
+        window.opener.postMessage({ loggedIn: false }, '*');
       }
     }).catch(() => {
       if(redirectUri)
-      window.parent.postMessage({ loggedIn: false }, '*');
+      window.opener.postMessage({ loggedIn: false }, '*');
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const handleLogin = async () => {
     try {
@@ -50,11 +53,13 @@ function App() {
           setLoggedIn(true);
           setMessage('Login successful.');
           if(redirectUri){
-            window.parent.postMessage({ loggedIn: true, token:res.data.token}, '*');
+            window.opener.postMessage({ loggedIn: true, token:res.data.token}, '*');
+            window.close();
           }
       } else{
         setMessage(res.data.message);
       }
+    // eslint-disable-next-line no-unused-vars
     } catch(err) {
       setMessage('Login failed.');
     }
